@@ -5,9 +5,6 @@
 
 int new_node(void* data, pNode *node_out)
 {
-	if (*node_out == NULL)
-		return OUT_PARAM_NULL;
-
 	pNode node = (pNode)malloc(sizeof(Node));
 
 	if (node == NULL) 
@@ -17,7 +14,8 @@ int new_node(void* data, pNode *node_out)
 	node->next = NULL;
 	node->next = NULL;
 
-	*node_out = node;
+	if (node_out != NULL)
+		*node_out = node;
 
 	return DS_OK;
 }

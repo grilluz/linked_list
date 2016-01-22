@@ -11,7 +11,7 @@ typedef struct
 }List, *pList;
 
 
-int init_list(pList list, long length); //
+int init_list(pList list, long length, void *data[]); //
 
 int remove_all(pList list); //
 
@@ -21,7 +21,7 @@ int append(pList list, void *data, pNode *node_out); //
 
 int push(pList list, void *data, pNode *node_out); //
 
-int insert(pList list, long index, void *data, pNode *node_out);
+int insert(pList list, long index, void *data, pNode *node_out); //
 
 int remove(pList list, pNode node_rm); //
 

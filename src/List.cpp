@@ -31,7 +31,7 @@ int remove_all(pList list)
 {
 	int err;
 
-	if (list == NULL || list->tail != NULL)
+	if (list == NULL || list->tail == NULL)
 		return NULL_LIST_ERR;
 
 	//remove all nodes frome the last one to the first one
@@ -74,62 +74,6 @@ int set_data(pList list, long index, void *data)
 
 	return DS_OK;
 }
-
-/*
-pNode append(pList *list, void *data)
-{
-	pNode node = (*list)->head;
-	pNode prev_node = NULL;
-
-	while (node != NULL) {
-		prev_node = node;
-		node = node->next;
-	}
-
-	node = new_node(data);
-	if (node == NULL)
-		return NULL;
-
-	if ((*list)->head == NULL) { 
-		//add the first node because list is empty
-		(*list)->head = node;
-		node->prev = NULL;
-	}
-	else {
-		prev_node->next = node;
-		node->prev = prev_node;
-		node->next = NULL;
-	}
-
-	(*list)->tail = node;
-	(*list)->length++;
-
-	return node;
-}
-*/
-
-/*
-pNode append(pList *list, void* data)
-{
-	pNode node = new_node(data);
-
-	if (node == NULL)
-		return NULL;
-
-	if ((*list)->head == NULL) {
-		//list is empty so add the first node
-		(*list)->head = node;
-	}
-	else {
-		(*list)->tail->next = node;
-		node->prev = (*list)->tail;
-	}
-
-	(*list)->tail = node;
-	(*list)->length++;
-
-	return node;
-}*/
 
 
 int append(pList list, void *data, pNode *node_out)
