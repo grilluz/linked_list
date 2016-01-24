@@ -1,4 +1,5 @@
-//test init and remove_all functions
+//test init_list() and remove_all() functions
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "../../src/List.h"
@@ -19,21 +20,25 @@ int main()
 		printf("%d  ", *((int*)data[i]));
 	}
 
+	//create new list
 	err = init_list(&list1, number_of_node, data);
 	if (err != DS_OK) {
-		DS_error(err);
+		DS_error(err, NULL);
 		return 1;
 	}
 
 	err = remove_all(&list1);
 	if (err != DS_OK) {
-		DS_error(err);
+		DS_error(err, NULL);
 		return 1;
 	}
 
 	for (int i = 0; i < number_of_node; i++) {
 		free(data[i]);
 	}
+
+	printf("\nPress any button to continue...");
+	getchar();
 
 	return 0; //test passed
 }

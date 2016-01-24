@@ -14,6 +14,8 @@
 #define OUT_PARAM_NULL    0x0008   //can't pass to output parameter function a null value
 #define NULL_DATA_ERR     0x000A   //
 
-void DS_error(int error);
+//string_opt is for an optional string to print when an error occurs. 
+//Pass NULL or nullptr to print anything
+void DS_error(int error, char *string_opt);
 
 #endif //DS_ERROR_H

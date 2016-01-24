@@ -119,9 +119,6 @@ int push(pList list, void *data, pNode *node_out)
 	if (data == NULL)
 		return NULL_DATA_ERR;
 
-	if (node_out == NULL)
-		return OUT_PARAM_NULL;
-
 	pNode node;
 	if (new_node(data, &node) != DS_OK)
 		return MALLOC_ERR;
@@ -138,6 +135,9 @@ int push(pList list, void *data, pNode *node_out)
 
 	list->head = node;
 	list->length++;
+
+	if (node_out != NULL)
+		*node_out = node;
 
 	return DS_OK;
 }
@@ -215,7 +215,31 @@ int remove(pList list, pNode node_rm)
 	return err;
 }
 
-int get_node(pList list, long index, pNode *node_out)
+int pop(pList list) 
+{
+	if (list == NULL)
+		return NULL_LIST_ERR;
+
+	int err;
+
+	if (list->tail == list->head) {
+		//remove the first and unique node
+		err = remove_node(list->head);
+		list->head = NULL;
+		list->tail = NULL;
+	}
+	else {
+		list->head = list->head->next;
+		err = remove_node(list->head->prev);
+		list->head->prev = NULL;
+	}
+
+	list->length--;
+
+	return err;
+}
+
+int get_node(pList list, long index, pNode *node_out_nec)
 {
 	if (list == NULL)
 		return NULL_LIST_ERR;
@@ -223,7 +247,7 @@ int get_node(pList list, long index, pNode *node_out)
 	if (index < 0 || index >= list->length)
 		return INVALID_INDEX;
 
-	if (node_out == NULL)
+	if (node_out_nec == NULL)
 		return OUT_PARAM_NULL;
 
 	pNode node;
@@ -236,12 +260,12 @@ int get_node(pList list, long index, pNode *node_out)
 	}
 	else {
 		node = list->tail;
-		for (int i = list->length; i > index; i--) {
+		for (int i = list->length - 1; i > index; i--) {
 			node = node->prev;
 		}
 	}
 
-	*node_out = node;
+	*node_out_nec = node;
 
 	return DS_OK;
 }

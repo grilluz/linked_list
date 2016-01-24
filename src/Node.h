@@ -20,5 +20,4 @@ int new_node(void *data, pNode *node_out);
 //		  DS_OK         successful
 int remove_node(pNode node);
 
-
 #endif //NODE_H

@@ -13,10 +13,10 @@ int main()
 
 	for (int i = 0; i < number_of_node; i++) {
 		data[i] = i * 55;
-
+		//create new nodes
 		err = new_node(&data[i], &node[i]);
 		if (err != DS_OK) {
-			DS_error(err);
+			DS_error(err, NULL);
 			return 1;
 		}
 	}
@@ -28,7 +28,7 @@ int main()
 	for (int i = 0; i < number_of_node; i++) {
 		err = remove_node(node[i]);
 		if (err != DS_OK) {
-			DS_error(err);
+			DS_error(err, NULL);
 			return 1;
 		}
 	}
@@ -40,9 +40,9 @@ int main()
 	node[0] = NULL;
 	err = remove_node(node[0]);
 	if (err != DS_OK)
-		DS_error(err);
+		DS_error(err, "Error!!!");
 
-	printf("\n\nPremere un tasto per continuare...");
+	printf("\n\nPress any button to continue...");
 	getchar();
 
 	return 0;  //test passed

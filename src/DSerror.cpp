@@ -1,7 +1,7 @@
 #include "DSerror.h"
 #include <stdio.h>
 
-void DS_error(int error)
+void DS_error(int error, char *string_opt)
 {
 	switch (error)
 	{
@@ -42,6 +42,12 @@ void DS_error(int error)
 	case NULL_DATA_ERR:
 		fputs("Passed a null pointer to data to the function", stderr);
 		break;
+
+	default:
+		fputs("Has occurred an error...", stderr);
 	}
+
+	if (string_opt != NULL)
+		fputs(string_opt, stderr);
 }
 
