@@ -43,6 +43,9 @@ void DS_error(int error, char *string_opt)
 		fputs("Passed a null pointer to data to the function", stderr);
 		break;
 
+	case INVALID_INPUT:
+		fputs("Invalid input was passed to the function...", stderr);
+
 	default:
 		fputs("Has occurred an error...", stderr);
 	}

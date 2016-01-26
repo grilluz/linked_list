@@ -298,3 +298,44 @@ int get_index(pList list, pNode node, long *index_out)
 
 	return DS_OK;
 }
+
+int move(pList list, long index, direction dir, pNode *node_out)
+{
+	if (list == NULL)
+		return NULL_LIST_ERR;
+
+	if (node_out == NULL)
+		return OUT_PARAM_NULL;
+
+	if (index < 0 || index > list->length)
+		return INVALID_INDEX;
+
+	if (dir != FORWARD || dir != BACKWARD)
+		return INVALID_INPUT;
+
+	pNode node;
+	int err = get_node(list, index, &node);
+	if (err != DS_OK)
+		return err;
+
+	if (dir == FORWARD) {
+		if (node == list->tail) {
+			node = list->head;
+		}
+		else {
+			node = node->next;
+		}
+	}
+	else {
+		if (node == list->head) {
+			node = list->tail;
+		}
+		else {
+			node = node->prev;
+		}
+	}
+
+	*node_out = node;
+
+	return DS_OK;
+}
