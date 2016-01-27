@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <limits.h> //for LONG_MAX
 #include "List.h"
 #include "DSerror.h"
 
